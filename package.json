@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/G1tHubLloyd/api_movie#readme",
   "dependencies": {
+    "body-parse": "^0.1.0",
     "express": "^5.1.0"
   }
 }
