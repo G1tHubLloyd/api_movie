@@ -1,17 +1,17 @@
-// Require necessary modules
+// Import required modules
 const express = require('express');
 const morgan = require('morgan');
 
 const app = express();
-const port = 3000; // You can change this if needed
+const port = 3000; // You can change this to any available port
 
-// Use Morgan to log all requests
+// Use Morgan middleware to log all incoming requests
 app.use(morgan('common'));
 
 // Serve static files from the "public" folder
 app.use(express.static('public'));
 
-// GET route for "/movies"
+// GET route for "/movies" — returns top 10 movies as JSON
 app.get('/movies', (req, res) => {
   res.json([
     { title: 'The Shawshank Redemption', year: 1994 },
@@ -27,18 +27,18 @@ app.get('/movies', (req, res) => {
   ]);
 });
 
-// GET route for "/"
+// GET route for "/" — returns a default welcome message
 app.get('/', (req, res) => {
-  res.send('Welcome to my movie API 🎬');
+  res.send('🎬 Welcome to the Movie API! Explore /movies or /documentation.html');
 });
 
-// Error-handling middleware
+// Error-handling middleware — logs errors to the terminal
 app.use((err, req, res, next) => {
-  console.error('Application error:', err.stack);
-  res.status(500).send('Something broke!');
+  console.error('🔥 Application error:', err.stack);
+  res.status(500).send('Something went wrong on the server.');
 });
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`✅ Server is running at http://localhost:${port}`);
 });
