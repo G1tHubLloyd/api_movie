@@ -1,1 +1,75 @@
-app.use(express.static('public'));
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie API Documentation</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Movie API Endpoint Documentation</h1>
+  <table>
+    <tr>
+      <th>Request</th>
+      <th>URL</th>
+      <th>Response</th>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/movies</td>
+      <td>Returns all movies</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/movies/:title</td>
+      <td>Returns data about a single movie</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/genres/:name</td>
+      <td>Returns genre description</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/directors/:name</td>
+      <td>Returns director bio and birth/death years</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/users</td>
+      <td>Registers a new user</td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>/users/:username</td>
+      <td>Updates user info</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/users/:username/favorites/:movieTitle</td>
+      <td>Adds movie to user's favorites</td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>/users/:username/favorites/:movieTitle</td>
+      <td>Removes movie from user's favorites</td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>/users/:username</td>
+      <td>Deregisters user</td>
+    </tr>
+  </table>
+</body>
+</html>
