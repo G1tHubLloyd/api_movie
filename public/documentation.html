@@ -1,75 +1,178 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Movie API Documentation</title>
+  <meta charset="UTF-8">
+  <title>API Documentation</title>
   <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
     }
-    th, td {
-      padding: 12px;
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    ul {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    pre {
+      background: #eef;
+      padding: 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    img {
+      max-width: 600px;
+      margin-top: 10px;
       border: 1px solid #ccc;
-      text-align: left;
-    }
-    th {
-      background-color: #f4f4f4;
+      border-radius: 6px;
     }
   </style>
 </head>
 <body>
-  <h1>Movie API Endpoint Documentation</h1>
-  <table>
-    <tr>
-      <th>Request</th>
-      <th>URL</th>
-      <th>Response</th>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/movies</td>
-      <td>Returns all movies</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/movies/:title</td>
-      <td>Returns data about a single movie</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/genres/:name</td>
-      <td>Returns genre description</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/directors/:name</td>
-      <td>Returns director bio and birth/death years</td>
-    </tr>
-    <tr>
-      <td>POST</td>
-      <td>/users</td>
-      <td>Registers a new user</td>
-    </tr>
-    <tr>
-      <td>PUT</td>
-      <td>/users/:username</td>
-      <td>Updates user info</td>
-    </tr>
-    <tr>
-      <td>POST</td>
-      <td>/users/:username/favorites/:movieTitle</td>
-      <td>Adds movie to user's favorites</td>
-    </tr>
-    <tr>
-      <td>DELETE</td>
-      <td>/users/:username/favorites/:movieTitle</td>
-      <td>Removes movie from user's favorites</td>
-    </tr>
-    <tr>
-      <td>DELETE</td>
-      <td>/users/:username</td>
-      <td>Deregisters user</td>
-    </tr>
-  </table>
+
+  <h1>Movie & User API Documentation</h1>
+
+  <h2>🎬 Movies Endpoints</h2>
+
+  <h3>GET /movies</h3>
+  <p>Returns a list of all movies in the database.</p>
+  <ul>
+    <li><strong>Method:</strong> GET</li>
+    <li><strong>URL:</strong> /movies</li>
+    <li><strong>Query Parameters:</strong> None</li>
+    <li><strong>Request Body:</strong> None</li>
+    <li><strong>Response Format:</strong> JSON array of movie objects</li>
+  </ul>
+  <img src="/screentshots/get-movies.png" alt="GET /movies response screenshot" />
+
+  <h3>GET /movies/:id</h3>
+  <p>Returns details of a specific movie by its ID.</p>
+  <ul>
+    <li><strong>Method:</strong> GET</li>
+    <li><strong>URL:</strong> /movies/:id</li>
+    <li><strong>Query Parameters:</strong> None</li>
+    <li><strong>Request Body:</strong> None</li>
+    <li><strong>Response Format:</strong> JSON object of the movie</li>
+  </ul>
+  <img src="/screentshots/get-movie-id.png" alt="GET /movies/:id response screenshot" />
+
+  <h3>POST /movies</h3>
+  <p>Adds a new movie to the database.</p>
+  <ul>
+    <li><strong>Method:</strong> POST</li>
+    <li><strong>URL:</strong> /movies</li>
+    <li><strong>Query Parameters:</strong> None</li>
+    <li><strong>Request Body Format:</strong> JSON</li>
+    <li><strong>Example:</strong>
+      <pre>{
+  "title": "Inception",
+  "director": "Christopher Nolan",
+  "year": 2010
+}</pre>
+    </li>
+    <li><strong>Response Format:</strong> Confirmation message or created movie object</li>
+  </ul>
+  <img src="/screentshots/post-movie.png" alt="POST /movies response screenshot" />
+
+  <h3>PUT /movies/:id</h3>
+  <p>Updates an existing movie by its ID.</p>
+  <ul>
+    <li><strong>Method:</strong> PUT</li>
+    <li><strong>URL:</strong> /movies/:id</li>
+    <li><strong>Query Parameters:</strong> None</li>
+    <li><strong>Request Body Format:</strong> JSON</li>
+    <li><strong>Example:</strong>
+      <pre>{
+  "title": "Inception (Updated)",
+  "year": 2011
+}</pre>
+    </li>
+    <li><strong>Response Format:</strong> Confirmation message or updated movie object</li>
+  </ul>
+  <img src="/screentshots/put-movie.png" alt="PUT /movies/:id response screenshot" />
+
+  <h3>DELETE /movies/:id</h3>
+  <p>Deletes a movie by its ID.</p>
+  <ul>
+    <li><strong>Method:</strong> DELETE</li>
+    <li><strong>URL:</strong> /movies/:id</li>
+    <li><strong>Query Parameters:</strong> None</li>
+    <li><strong>Request Body:</strong> None</li>
+    <li><strong>Response Format:</strong> Confirmation message</li>
+  </ul>
+  <img src="/screentshots/delete-movie.png" alt="DELETE /movies/:id response screenshot" />
+
+  <h2>👤 Users Endpoints</h2>
+
+  <h3>GET /users</h3>
+  <p>Returns a list of all registered users.</p>
+  <ul>
+    <li><strong>Method:</strong> GET</li>
+    <li><strong>URL:</strong> /users</li>
+    <li><strong>Query Parameters:</strong> None</li>
+    <li><strong>Request Body:</strong> None</li>
+    <li><strong>Response Format:</strong> JSON array of user objects</li>
+  </ul>
+  <img src="/screentshots/get-users.png" alt="GET /users response screenshot" />
+
+  <h3>GET /users/:id</h3>
+  <p>Returns details of a specific user by their ID.</p>
+  <ul>
+    <li><strong>Method:</strong> GET</li>
+    <li><strong>URL:</strong> /users/:id</li>
+    <li><strong>Query Parameters:</strong> None</li>
+    <li><strong>Request Body:</strong> None</li>
+    <li><strong>Response Format:</strong> JSON object of the user</li>
+  </ul>
+  <img src="/screentshots/get-users-id.png" alt="GET /users/:id response screenshot" />
+
+  <h3>POST /users</h3>
+  <p>Registers a new user.</p>
+  <ul>
+    <li><strong>Method:</strong> POST</li>
+    <li><strong>URL:</strong> /users</li>
+    <li><strong>Query Parameters:</strong> None</li>
+    <li><strong>Request Body Format:</strong> JSON</li>
+    <li><strong>Example:</strong>
+      <pre>{
+  "username": "janedoe",
+  "email": "jane@example.com",
+  "password": "securepass"
+}</pre>
+    </li>
+    <li><strong>Response Format:</strong> Confirmation message or created user object</li>
+  </ul>
+  <img src="/screentshots/post-users.png" alt="POST /users response screenshot" />
+
+  <h3>PUT /users/:id</h3>
+  <p>Updates user information by ID.</p>
+  <ul>
+    <li><strong>Method:</strong> PUT</li>
+    <li><strong>URL:</strong> /users/:id</li>
+    <li><strong>Query Parameters:</strong> None</li>
+    <li><strong>Request Body Format:</strong> JSON</li>
+    <li><strong>Example:</strong>
+      <pre>{
+  "email": "jane.new@example.com"
+}</pre>
+    </li>
+    <li><strong>Response Format:</strong> Confirmation message or updated user object</li>
+  </ul>
+  <img src="/screentshots/put-users.png" alt="PUT /users/:id response screenshot" />
+
+  <h3>DELETE /users/:id</h3>
+  <p>Deletes a user by their ID.</p>
+  <ul>
+    <li><strong>Method:</strong> DELETE</li>
+    <li><strong>URL:</strong> /users/:id</li>
+    <li><strong>Query Parameters:</strong> None</li>
+    <li><strong>Request Body:</strong> None</li>
+    <li><strong>Response Format:</strong> Confirmation message</li>
+  </ul>
+  <img src="/screentshots/delete-users.png" alt="DELETE /users/:id response screenshot" />
+
 </body>
 </html>

@@ -1,49 +1,44 @@
+// Import required modules
 const express = require('express');
+const morgan = require('morgan');
+
 const app = express();
-app.use(express.json());
+const port = 3000; // You can change this to any available port
 
-// Movies
+// Use Morgan middleware to log all incoming requests
+app.use(morgan('common'));
+
+// Serve static files from the "public" folder
+app.use(express.static('public'));
+
+// GET route for "/movies" — returns top 10 movies as JSON
 app.get('/movies', (req, res) => {
-  res.send('GET request: Returning all movies');
+  res.json([
+    { title: 'The Shawshank Redemption', year: 1994 },
+    { title: 'The Godfather', year: 1972 },
+    { title: 'The Dark Knight', year: 2008 },
+    { title: 'Pulp Fiction', year: 1994 },
+    { title: 'Forrest Gump', year: 1994 },
+    { title: 'Inception', year: 2010 },
+    { title: 'Fight Club', year: 1999 },
+    { title: 'The Matrix', year: 1999 },
+    { title: 'Goodfellas', year: 1990 },
+    { title: 'The Lord of the Rings: The Return of the King', year: 2003 }
+  ]);
 });
 
-app.get('/movies/:title', (req, res) => {
-  res.send(`GET request: Returning data for movie titled "${req.params.title}"`);
+// GET route for "/" — returns a default welcome message
+app.get('/', (req, res) => {
+  res.send('🎬 Welcome to the Movie API! Explore /movies or /documentation.html');
 });
 
-// Genres
-app.get('/genres/:name', (req, res) => {
-  res.send(`GET request: Returning description for genre "${req.params.name}"`);
+// Error-handling middleware — logs errors to the terminal
+app.use((err, req, res, next) => {
+  console.error('🔥 Application error:', err.stack);
+  res.status(500).send('Something went wrong on the server.');
 });
 
-// Directors
-app.get('/directors/:name', (req, res) => {
-  res.send(`GET request: Returning bio for director "${req.params.name}"`);
-});
-
-// Users
-app.post('/users', (req, res) => {
-  res.send('POST request: Registering new user');
-});
-
-app.put('/users/:username', (req, res) => {
-  res.send(`PUT request: Updating user "${req.params.username}"`);
-});
-
-app.post('/users/:username/favorites/:movieTitle', (req, res) => {
-  res.send(`POST request: Adding movie "${req.params.movieTitle}" to favorites for user "${req.params.username}"`);
-});
-
-app.delete('/users/:username/favorites/:movieTitle', (req, res) => {
-  res.send(`DELETE request: Removing movie "${req.params.movieTitle}" from favorites for user "${req.params.username}"`);
-});
-
-app.delete('/users/:username', (req, res) => {
-  res.send(`DELETE request: Deregistering user "${req.params.username}"`);
-});
-
-// Start server
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Start the server
+app.listen(port, () => {
+  console.log(`✅ Server is running at http://localhost:${port}`);
 });
